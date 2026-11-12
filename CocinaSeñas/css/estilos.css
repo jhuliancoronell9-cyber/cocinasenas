@@ -1,0 +1,1102 @@
+
+/* =========================================
+   COCINASEÑAS
+   Diseño retro: morado, dorado y negro
+========================================= */
+
+/* 1. VARIABLES GENERALES */
+:root {
+    --morado-oscuro: #180d29;
+    --morado: #392052;
+    --morado-claro: #68418a;
+    --dorado: #e6b94f;
+    --dorado-claro: #ffdc83;
+    --negro: #100c14;
+    --blanco: #fff8e9;
+    --gris: #c9bfd2;
+
+    --fuente-principal: 'Trebuchet MS', sans-serif;
+    --fuente-retro: 'Press Start 2P', cursive;
+}
+
+/* 2. CONFIGURACIÓN GENERAL */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--morado-oscuro);
+    background-image:
+        radial-gradient(#6b4380 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--blanco);
+    font-family: var(--fuente-principal);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* 3. CONTENEDOR GENERAL */
+.contenedor {
+    width: min(1150px, 92%);
+    margin: 0 auto;
+}
+
+/* 4. ENCABEZADO */
+.encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 2px solid var(--dorado);
+}
+
+.logo {
+    color: var(--dorado);
+    font-family: var(--fuente-retro);
+    font-size: 15px;
+    letter-spacing: -1px;
+}
+
+.navegacion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.navegacion a {
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--blanco);
+    transition: 0.2s;
+}
+
+.navegacion a:hover {
+    border-color: var(--dorado);
+    color: var(--dorado);
+}
+
+/* 5. TÍTULOS */
+.titulo-principal {
+    color: var(--dorado);
+    font-family: var(--fuente-retro);
+    font-size: clamp(25px, 5vw, 48px);
+    line-height: 1.5;
+    text-align: center;
+    text-shadow: 4px 4px 0 #4c2b61;
+}
+
+.subtitulo {
+    margin: 15px 0;
+    color: var(--dorado-claro);
+    font-size: clamp(17px, 2.5vw, 23px);
+    text-align: center;
+}
+
+.titulo-seccion {
+    margin-bottom: 20px;
+    color: var(--dorado);
+    font-family: var(--fuente-retro);
+    font-size: clamp(15px, 2.5vw, 21px);
+    line-height: 1.7;
+}
+
+/* 6. BOTONES */
+.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 22px;
+    border: 2px solid var(--dorado);
+    border-radius: 7px;
+    background: var(--dorado);
+    color: var(--negro);
+    font-weight: bold;
+    text-align: center;
+    transition: 0.2s ease;
+}
+
+.boton:hover {
+    transform: translateY(-3px);
+    background: var(--dorado-claro);
+    box-shadow: 0 5px 0 #8f6822;
+}
+
+.boton-secundario {
+    background: transparent;
+    color: var(--dorado);
+}
+
+.boton-secundario:hover {
+    background: var(--dorado);
+    color: var(--negro);
+}
+
+/* 7. TARJETAS */
+.tarjeta {
+    padding: 24px;
+    border: 2px solid var(--dorado);
+    border-radius: 12px;
+    background: rgba(43, 25, 61, 0.95);
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.35);
+}
+
+.tarjetas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+/* 8. PÁGINA PRINCIPAL */
+.portada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+    padding: 55px 0;
+    text-align: center;
+}
+
+.portada-descripcion {
+    max-width: 650px;
+    margin: 18px auto 30px;
+    color: var(--gris);
+    font-size: 18px;
+}
+
+.portada-opciones {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    width: min(750px, 100%);
+    margin-top: 30px;
+}
+
+.opcion-portada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px 20px;
+    border: 2px solid var(--dorado);
+    border-radius: 12px;
+    background: var(--morado);
+    transition: 0.25s;
+}
+
+.opcion-portada:hover {
+    transform: translateY(-6px);
+    background: var(--morado-claro);
+}
+
+.opcion-portada img {
+    width: 125px;
+    height: 145px;
+    object-fit: contain;
+}
+
+.opcion-portada h2 {
+    color: var(--dorado);
+    font-size: 22px;
+}
+
+/* 9. DICCIONARIO */
+.seccion-pagina {
+    padding: 45px 0;
+}
+
+.buscador {
+    width: 100%;
+    max-width: 550px;
+    margin: 20px auto;
+    padding: 14px 18px;
+    border: 2px solid var(--dorado);
+    border-radius: 8px;
+    outline: none;
+    background: var(--negro);
+    color: var(--blanco);
+    font-size: 16px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.tarjeta-alimento {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+}
+
+.tarjeta-alimento h3 {
+    color: var(--dorado);
+    text-align: center;
+}
+
+.imagen-alimento {
+    width: 100%;
+    height: 170px;
+    border-radius: 8px;
+    background: var(--morado-oscuro);
+    object-fit: contain;
+}
+
+.video-alimento {
+    width: 100%;
+    max-height: 230px;
+    border-radius: 8px;
+    background: var(--negro);
+}
+
+.separador-dorado {
+    width: 100%;
+    height: 3px;
+    border: 0;
+    background: var(--dorado);
+}
+
+/* 10. INSTRUCCIONES */
+.paso {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.numero-paso {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--dorado);
+    color: var(--negro);
+    font-weight: bold;
+}
+
+/* 11. JUEGO */
+.panel-juego {
+    max-width: 850px;
+    margin: 25px auto;
+    padding: 25px;
+    border: 2px solid var(--dorado);
+    border-radius: 12px;
+    background: var(--morado);
+    text-align: center;
+}
+
+.progreso {
+    width: 100%;
+    height: 12px;
+    margin: 15px 0;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--negro);
+}
+
+.progreso-barra {
+    width: 0%;
+    height: 100%;
+    background: var(--dorado);
+    transition: width 0.3s;
+}
+
+.opciones-juego {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.opcion-juego {
+    padding: 12px;
+    border: 2px solid var(--dorado);
+    border-radius: 9px;
+    background: var(--morado-oscuro);
+    color: var(--blanco);
+    transition: 0.2s;
+}
+
+.opcion-juego:hover {
+    background: var(--morado-claro);
+    transform: scale(1.02);
+}
+
+.opcion-juego img {
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+}
+
+.menu-resultado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.menu-plato {
+    padding: 15px;
+    border: 1px dashed var(--dorado);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 12. PERSONAJES */
+.personaje {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 13. PIE DE PÁGINA */
+.pie-pagina {
+    margin-top: 50px;
+    padding: 25px 10px;
+    border-top: 2px solid var(--dorado);
+    color: var(--gris);
+    text-align: center;
+    font-size: 13px;
+}
+
+/* 14. MENSAJES Y ESTADOS */
+.mensaje {
+    margin: 15px 0;
+    padding: 14px;
+    border-radius: 8px;
+    background: var(--morado-oscuro);
+    text-align: center;
+}
+
+.oculto {
+    display: none !important;
+}
+
+/* 15. DISEÑO PARA CELULARES */
+@media (max-width: 650px) {
+    .encabezado {
+        flex-direction: column;
+    }
+
+    .navegacion {
+        justify-content: center;
+    }
+
+    .portada-opciones {
+        grid-template-columns: 1fr;
+    }
+
+    .opciones-juego {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-resultado {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-principal {
+        font-size: 23px;
+    }
+
+    .tarjeta {
+        padding: 17px;
+    }
+}
+
+
+/* =========================================
+   16. ACCESIBILIDAD Y RECURSOS FALTANTES
+========================================= */
+
+:focus-visible {
+    outline: 3px solid var(--dorado-claro);
+    outline-offset: 3px;
+}
+
+.personaje {
+    image-rendering: pixelated;
+}
+
+.sin-recurso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 90px;
+    padding: 8px;
+    border: 1px dashed var(--gris);
+    border-radius: 8px;
+    color: var(--gris);
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* =========================================
+   17. PÁGINA DE INICIO ANIMADA
+   Logo grande a la izquierda, contenido a la derecha
+========================================= */
+
+.pagina-inicio .encabezado {
+    justify-content: flex-end;
+}
+
+.pagina-inicio .encabezado .logo {
+    display: none;
+}
+
+.hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 44px;
+    align-items: center;
+    min-height: 80vh;
+    padding: 45px 0 30px;
+}
+
+.hero-izquierda {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 26px;
+}
+
+/* Logo grande */
+.logo-grande {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: var(--fuente-retro);
+    font-size: clamp(30px, 6.4vw, 78px);
+    line-height: 1.1;
+    text-shadow: 5px 5px 0 #4c2b61;
+}
+
+.logo-grande .fila {
+    display: flex;
+}
+
+.logo-grande .fila-1 { color: var(--dorado); }
+.logo-grande .fila-2 { color: var(--dorado-claro); }
+
+.logo-grande .fila span {
+    display: inline-block;
+    animation:
+        letra-cae 0.55s steps(6) both,
+        letra-ola 3.2s ease-in-out infinite;
+    animation-delay:
+        calc(var(--i) * 0.09s),
+        calc(1.4s + var(--i) * 0.12s);
+    animation-fill-mode: both, none;
+}
+
+.lema-logo {
+    padding: 8px 14px;
+    border: 2px solid var(--dorado);
+    border-radius: 6px;
+    background: var(--morado);
+    color: var(--blanco);
+    font-size: clamp(14px, 1.8vw, 18px);
+    animation: entra-izquierda 0.6s 1.2s both;
+}
+
+.hero-chefs {
+    display: flex;
+    align-items: flex-end;
+    gap: 26px;
+}
+
+.personaje-animado {
+    width: clamp(110px, 16vw, 170px);
+    height: auto;
+    image-rendering: pixelated;
+    animation: flotar 1.4s steps(4, end) infinite alternate;
+}
+
+.personaje-animado:nth-child(2) {
+    animation-delay: 0.7s;
+}
+
+/* Contenido de la derecha */
+.hero-derecha {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.hero-derecha .subtitulo {
+    margin: 0;
+    text-align: left;
+    animation: entra-lado 0.6s 1.0s both;
+}
+
+.hero-derecha .portada-descripcion {
+    margin: 0;
+    animation: entra-lado 0.6s 1.15s both;
+}
+
+.opciones-hero {
+    display: grid;
+    gap: 18px;
+}
+
+.opcion-hero {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 4px 18px;
+    align-items: center;
+    padding: 22px;
+    border: 2px solid var(--dorado);
+    border-radius: 12px;
+    background: var(--morado);
+    transition: transform 0.25s, background 0.25s;
+    animation: entra-lado 0.6s both;
+}
+
+.opcion-hero:nth-child(1) { animation-delay: 1.35s; }
+.opcion-hero:nth-child(2) { animation-delay: 1.55s; }
+
+.opcion-hero:hover {
+    transform: translateX(8px);
+    background: var(--morado-claro);
+}
+
+.opcion-hero .icono-hero {
+    grid-row: 1 / span 3;
+    font-size: 52px;
+    text-align: center;
+    animation: rebote 1.6s steps(5) infinite;
+}
+
+.opcion-hero:nth-child(2) .icono-hero {
+    animation-delay: 0.8s;
+}
+
+.opcion-hero h2 {
+    color: var(--dorado);
+    font-size: 21px;
+}
+
+.opcion-hero p {
+    color: var(--gris);
+}
+
+.opcion-hero .boton {
+    justify-self: start;
+    margin-top: 8px;
+}
+
+.boton-pulso {
+    animation: pulso 1.8s infinite;
+}
+
+/* Estrellas decorativas */
+.estrella {
+    position: absolute;
+    color: var(--dorado-claro);
+    font-size: 20px;
+    pointer-events: none;
+    animation: titilar 2s steps(2) infinite;
+}
+
+.estrella:nth-of-type(1) { top: 6%;  left: 3%;  }
+.estrella:nth-of-type(2) { top: 14%; left: 52%; animation-delay: 0.5s; }
+.estrella:nth-of-type(3) { top: 62%; left: 47%; animation-delay: 1s; }
+.estrella:nth-of-type(4) { top: 90%; left: 8%;  animation-delay: 1.4s; }
+.estrella:nth-of-type(5) { top: 4%;  left: 94%; animation-delay: 0.8s; }
+
+
+/* =========================================
+   18. DICCIONARIO EN FORMATO LIBRO (VERTICAL)
+   Una página a la vez, con las tres imágenes
+   y el video apilados de arriba hacia abajo.
+========================================= */
+
+.libro-zona {
+    width: min(500px, 100%);
+    margin: 20px auto 10px;
+}
+
+.libro-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.libro-nav .boton {
+    min-width: 54px;
+    padding: 10px 14px;
+}
+
+.libro-nav .boton[disabled] {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.libro-indicador {
+    color: var(--dorado);
+    font-family: var(--fuente-retro);
+    font-size: 12px;
+    text-align: center;
+}
+
+.libro {
+    position: relative;
+    margin: 6px 12px 22px 0;
+    perspective: 1800px;
+    touch-action: pan-y;
+}
+
+.libro-pagina {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px 22px 20px 38px;
+    border: 3px solid var(--dorado);
+    border-radius: 6px 14px 14px 6px;
+    background: linear-gradient(90deg, #2b193d 0, var(--morado) 26px, var(--morado) 100%);
+    box-shadow:
+        4px 4px 0 #2b193d,
+        8px 8px 0 #231435,
+        12px 12px 0 #1a0f29;
+    transform-origin: left center;
+}
+
+/* Costura del lomo */
+.libro-pagina::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: 13px;
+    width: 4px;
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--dorado) 0 8px,
+        transparent 8px 18px
+    );
+}
+
+.libro-titulo {
+    color: var(--dorado);
+    font-family: var(--fuente-retro);
+    font-size: clamp(16px, 4vw, 22px);
+    line-height: 1.5;
+    text-align: center;
+}
+
+.libro-categoria {
+    margin-top: -8px;
+    color: var(--gris);
+    text-align: center;
+}
+
+.libro-bloque {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.libro-bloque h4 {
+    color: var(--dorado-claro);
+    font-size: 14px;
+}
+
+.libro-bloque .imagen-alimento {
+    height: 190px;
+}
+
+.libro-bloque .video-alimento {
+    max-height: 260px;
+}
+
+.libro-numero {
+    color: var(--gris);
+    font-size: 13px;
+    text-align: center;
+}
+
+.libro-pagina.sale-sig  { animation: voltear-sale-sig 0.22s ease-in forwards; }
+.libro-pagina.entra-sig { animation: voltear-entra-sig 0.28s ease-out both; }
+.libro-pagina.sale-ant  { transform-origin: right center; animation: voltear-sale-ant 0.22s ease-in forwards; }
+.libro-pagina.entra-ant { transform-origin: right center; animation: voltear-entra-ant 0.28s ease-out both; }
+
+
+/* =========================================
+   19. JUEGO: ARMAR EL PLATILLO
+========================================= */
+
+.mostrador {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin: 20px 0 10px;
+    text-align: left;
+}
+
+.personaje-mini {
+    width: 96px;
+    height: auto;
+    image-rendering: pixelated;
+}
+
+.globo {
+    position: relative;
+    padding: 14px 16px;
+    border: 2px solid var(--dorado);
+    border-radius: 10px;
+    background: var(--morado-oscuro);
+}
+
+.globo::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 16px;
+    height: 16px;
+    border-bottom: 2px solid var(--dorado);
+    border-left: 2px solid var(--dorado);
+    background: var(--morado-oscuro);
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.globo strong {
+    color: var(--dorado-claro);
+}
+
+/* Bandeja donde se arma el platillo */
+.bandeja {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+    margin: 18px 0 6px;
+    padding: 12px;
+    border: 3px solid var(--dorado);
+    border-radius: 14px;
+    background: var(--morado-oscuro);
+}
+
+.hueco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 118px;
+    padding: 6px 4px;
+    border: 2px dashed rgba(230, 185, 79, 0.5);
+    border-radius: 8px;
+    font-size: 11px;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.hueco-icono {
+    font-size: 22px;
+}
+
+.hueco-titulo {
+    color: var(--dorado);
+    font-weight: bold;
+    letter-spacing: 0;
+}
+
+.hueco img {
+    width: 100%;
+    height: 54px;
+    object-fit: contain;
+}
+
+.hueco .sin-recurso {
+    min-height: 54px;
+    font-size: 10px;
+}
+
+.hueco-nombre {
+    color: var(--blanco);
+}
+
+.hueco.activo {
+    border-style: solid;
+    border-color: var(--dorado-claro);
+    animation: parpadeo 1s steps(2) infinite;
+}
+
+.hueco.lleno {
+    border-style: solid;
+    border-color: #76b900;
+    background: rgba(118, 185, 0, 0.1);
+}
+
+.hueco.fallado {
+    border-color: #c0564b;
+    color: var(--gris);
+}
+
+.opciones-juego.tres {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.opcion-juego.correcta {
+    border-color: #76b900;
+    background: rgba(118, 185, 0, 0.18);
+}
+
+.opcion-juego.incorrecta {
+    border-color: #c0564b;
+}
+
+.opcion-juego:disabled {
+    cursor: default;
+}
+
+.opcion-juego:disabled:hover {
+    transform: none;
+}
+
+.mensaje-chef {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+}
+
+.mensaje-chef .personaje-mini {
+    width: 72px;
+    flex-shrink: 0;
+}
+
+.platillos-final {
+    display: grid;
+    gap: 22px;
+    margin-top: 20px;
+}
+
+.platillo-final h3 {
+    margin-bottom: 8px;
+    color: var(--dorado-claro);
+}
+
+.resumen-puntos {
+    color: var(--gris);
+    margin-top: 6px;
+}
+
+
+/* =========================================
+   20. ANIMACIONES
+========================================= */
+
+@keyframes letra-cae {
+    from { transform: translateY(-140px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes letra-ola {
+    0%, 55%, 100% { transform: translateY(0); }
+    25%           { transform: translateY(-9px); }
+}
+
+@keyframes flotar {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-12px); }
+}
+
+@keyframes rebote {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+@keyframes entra-lado {
+    from { transform: translateX(40px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes entra-izquierda {
+    from { transform: translateX(-40px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulso {
+    0%   { box-shadow: 0 0 0 0 rgba(230, 185, 79, 0.6); }
+    70%  { box-shadow: 0 0 0 14px rgba(230, 185, 79, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(230, 185, 79, 0); }
+}
+
+@keyframes titilar {
+    0%   { opacity: 1; transform: scale(1); }
+    50%  { opacity: 0.25; transform: scale(0.7); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes parpadeo {
+    0%   { background: rgba(255, 220, 131, 0.14); }
+    50%  { background: transparent; }
+}
+
+@keyframes voltear-sale-sig {
+    to { transform: rotateY(-75deg); opacity: 0; }
+}
+
+@keyframes voltear-entra-sig {
+    from { transform: rotateY(75deg); opacity: 0; }
+    to   { transform: rotateY(0); opacity: 1; }
+}
+
+@keyframes voltear-sale-ant {
+    to { transform: rotateY(75deg); opacity: 0; }
+}
+
+@keyframes voltear-entra-ant {
+    from { transform: rotateY(-75deg); opacity: 0; }
+    to   { transform: rotateY(0); opacity: 1; }
+}
+
+@keyframes aparece {
+    from { transform: scale(0.6); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
+.hueco.lleno img {
+    animation: aparece 0.35s steps(5) both;
+}
+
+/* Quien prefiere menos movimiento lo tiene todo quieto */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* =========================================
+   21. AJUSTES PARA PANTALLAS PEQUEÑAS
+========================================= */
+
+@media (max-width: 860px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        min-height: 0;
+    }
+
+    .hero-izquierda {
+        align-items: center;
+    }
+
+    .logo-grande .fila {
+        justify-content: center;
+    }
+
+    .hero-derecha .subtitulo {
+        text-align: center;
+    }
+
+    .hero-derecha .portada-descripcion {
+        text-align: center;
+    }
+}
+
+@media (max-width: 650px) {
+    .pagina-inicio .encabezado {
+        justify-content: center;
+    }
+
+    .opcion-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .opcion-hero .icono-hero {
+        grid-row: auto;
+    }
+
+    .opcion-hero .boton {
+        justify-self: center;
+    }
+
+    .libro-bloque .imagen-alimento {
+        height: 170px;
+    }
+
+    .bandeja {
+        gap: 5px;
+        padding: 8px;
+    }
+
+    .hueco {
+        min-height: 92px;
+    }
+
+    .hueco-titulo {
+        display: none;
+    }
+
+    .hueco img {
+        height: 44px;
+    }
+
+    .hueco-nombre {
+        font-size: 10px;
+    }
+
+    .opciones-juego {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .opcion-juego img {
+        height: 90px;
+    }
+
+    .opciones-juego.tres {
+        grid-template-columns: 1fr;
+    }
+
+    .mostrador {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
+
+    .globo::before {
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%) rotate(135deg);
+    }
+}

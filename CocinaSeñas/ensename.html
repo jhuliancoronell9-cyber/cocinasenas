@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Enséñame | CocinaSeñas</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="contenedor encabezado">
+
+        <a href="index.html" class="logo">
+            COCINASEÑAS
+        </a>
+
+        <nav class="navegacion">
+            <a href="index.html">Inicio</a>
+            <a href="diccionario.html">Diccionario</a>
+            <a href="ensename.html">Enséñame</a>
+        </nav>
+
+    </header>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenedor seccion-pagina">
+
+        <!-- PRESENTACIÓN -->
+        <section style="text-align:center;">
+
+            <h1 class="titulo-principal">
+                ¡ENSÉÑAME!
+            </h1>
+
+            <p class="subtitulo">
+                Aprende a jugar CocinaSeñas
+            </p>
+
+            <img
+                src="personajes/chef-dorado.svg"
+                alt="Chef Dorado, tu compañero de aprendizaje"
+                class="personaje"
+                style="margin:20px auto;"
+            >
+
+            <p class="portada-descripcion">
+                ¡Bienvenido a la cocina! Aquí aprenderás cómo reconocer
+                las señas de los alimentos y usarlas para armar el
+                platillo que pide cada cliente.
+            </p>
+
+        </section>
+
+
+        <!-- REGLAS DEL JUEGO -->
+        <section style="margin-top:45px;">
+
+            <h2 class="titulo-seccion">
+                ¿CÓMO SE JUEGA?
+            </h2>
+
+
+            <!-- PASO 1 -->
+            <article class="tarjeta paso">
+
+                <span class="numero-paso">1</span>
+
+                <div>
+
+                    <h3 style="color:var(--dorado);">
+                        RECIBE EL PEDIDO
+                    </h3>
+
+                    <p>
+                        Cada cliente quiere un platillo de 5 partes: entrada, plato fuerte, acompañamiento, bebida y postre. Te pedirá una parte a la vez, y la bandeja te muestra cómo va quedando.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <!-- PASO 2 -->
+            <article class="tarjeta paso">
+
+                <span class="numero-paso">2</span>
+
+                <div>
+
+                    <h3 style="color:var(--dorado);">
+                        OBSERVA LA SEÑA
+                    </h3>
+
+                    <p>
+                        En cada ronda aparecerá un video con la seña del ingrediente que el cliente necesita. Míralo las veces que quieras: el video se repite solo.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <!-- PASO 3 -->
+            <article class="tarjeta paso">
+
+                <span class="numero-paso">3</span>
+
+                <div>
+
+                    <h3 style="color:var(--dorado);">
+                        ELIGE EL INGREDIENTE
+                    </h3>
+
+                    <p>
+                        Encontrarás cuatro opciones de la misma parte del platillo. Elige la imagen que corresponde a la seña. Si aciertas, el ingrediente se agrega a la bandeja.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <!-- PASO 4 -->
+            <article class="tarjeta paso">
+
+                <span class="numero-paso">4</span>
+
+                <div>
+
+                    <h3 style="color:var(--dorado);">
+                        GANA PUNTOS
+                    </h3>
+
+                    <p>
+                        Cada ingrediente correcto vale 10 puntos. Si fallas, no sumas puntos y esa parte del platillo queda sin completar.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <!-- PASO 5 -->
+            <article class="tarjeta paso">
+
+                <span class="numero-paso">5</span>
+
+                <div>
+
+                    <h3 style="color:var(--dorado);">
+                        LEE LA REACCIÓN DEL CLIENTE
+                    </h3>
+
+                    <p>
+                        Cuando terminas un platillo, el cliente te dice con una seña qué le pareció: RICO, OLER o LLENO. Si la reconoces, ganas 5 puntos de propina.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <!-- PASO 6 -->
+            <article class="tarjeta paso">
+
+                <span class="numero-paso">6</span>
+
+                <div>
+
+                    <h3 style="color:var(--dorado);">
+                        ATIENDE A DOS CLIENTES
+                    </h3>
+
+                    <p>
+                        Una partida tiene 2 clientes y 10 rondas de ingredientes. Al final verás tu puntuación y los dos platillos que armaste.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- EJEMPLO -->
+        <section style="margin-top:50px;">
+
+            <h2 class="titulo-seccion">
+                EJEMPLO DE UN PEDIDO
+            </h2>
+
+            <article class="tarjeta">
+
+                <h3 style="color:var(--dorado); text-align:center;">
+                    HÍGADO CON SALSA DE TOMATE Y DE POSTRE UN PASTEL
+                </h3>
+
+                <p style="text-align:center; margin:15px 0;">
+                    Imagina que el cliente te pide, con señas, estas
+                    tres partes de su platillo. Por cada seña que
+                    reconozcas, esa parte llega a la bandeja.
+                </p>
+
+                <div class="tarjetas-grid">
+
+                    <div style="text-align:center;">
+
+                        <p style="color:var(--dorado);">PLATO FUERTE</p>
+
+                        <img
+                            src="Contenido/alimentos/alimentos_HIGADO.png"
+                            alt="Hígado"
+                            class="imagen-alimento"
+                            style="max-width:200px;"
+                            onerror="imagenNoDisponible(this)"
+                        >
+
+                        <p style="color:var(--dorado-claro);">
+                            Hígado
+                        </p>
+
+                    </div>
+
+                    <div style="text-align:center;">
+
+                        <p style="color:var(--dorado);">ACOMPAÑAMIENTO</p>
+
+                        <img
+                            src="Contenido/alimentos/alimentos_SALSA_DE_TOMATE.png"
+                            alt="Salsa de tomate"
+                            class="imagen-alimento"
+                            style="max-width:200px;"
+                            onerror="imagenNoDisponible(this)"
+                        >
+
+                        <p style="color:var(--dorado-claro);">
+                            Salsa de tomate
+                        </p>
+
+                    </div>
+
+                    <div style="text-align:center;">
+
+                        <p style="color:var(--dorado);">POSTRE</p>
+
+                        <img
+                            src="Contenido/alimentos/alimentos_PONQUE_TORTA.png"
+                            alt="Ponqué (torta)"
+                            class="imagen-alimento"
+                            style="max-width:200px;"
+                            onerror="imagenNoDisponible(this)"
+                        >
+
+                        <p style="color:var(--dorado-claro);">
+                            Ponqué (torta)
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div style="text-align:center; margin-top:20px;">
+
+                    <img
+                        src="personajes/cliente-feliz.svg"
+                        alt="Cliente feliz"
+                        class="personaje"
+                    >
+
+                </div>
+
+                <div class="mensaje" style="margin-top:20px;">
+
+                    <h3 style="color:var(--dorado);">
+                        ¡MUY BIEN!
+                    </h3>
+
+                    <p>
+                        Cada parte reconocida suma 10 puntos. Cuando el
+                        platillo está listo, el cliente reacciona con una
+                        seña y, si la reconoces, ganas 5 puntos de propina.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- REGLAS IMPORTANTES -->
+        <section style="margin-top:45px;">
+
+            <h2 class="titulo-seccion">
+                RECUERDA
+            </h2>
+
+            <article class="tarjeta">
+
+                <p>★ Cada partida tiene 2 clientes y 10 rondas.</p>
+
+                <p>★ Cada platillo tiene 5 partes: entrada, plato fuerte, acompañamiento, bebida y postre.</p>
+
+                <p>★ Cada ingrediente correcto vale 10 puntos.</p>
+
+                <p>★ Los ingredientes incorrectos no suman puntos y dejan esa parte sin completar.</p>
+
+                <p>★ Al terminar cada platillo, reconocer la reacción del cliente (RICO, OLER o LLENO) da 5 puntos de propina.</p>
+
+                <p>★ La puntuación máxima es de 110 puntos: 100 por los ingredientes y 10 de propinas.</p>
+
+                <p>★ Puedes consultar el diccionario para estudiar antes de jugar.</p>
+
+            </article>
+
+        </section>
+
+
+        <!-- BOTÓN PARA COMENZAR -->
+        <section style="text-align:center; margin-top:50px;">
+
+            <img
+                src="personajes/chef-dorado.svg"
+                alt="Chef Dorado"
+                class="personaje"
+            >
+
+            <h2 class="titulo-seccion">
+                ¿ESTÁS LISTO PARA COCINAR?
+            </h2>
+
+            <p style="margin-bottom:20px; color:var(--gris);">
+                ¡Pon a prueba lo que has aprendido!
+            </p>
+
+            <a href="juego.html" class="boton">
+                ¡LISTO PARA COCINAR!
+            </a>
+
+            <br><br>
+
+            <a href="index.html" class="boton boton-secundario">
+                VOLVER AL INICIO
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+
+        <p>
+            COCINASEÑAS © <span class="anio-actual">2026</span>
+        </p>
+
+        <p>
+            Aprende, reconoce y disfruta.
+        </p>
+
+    </footer>
+
+
+    <!-- FUNCIONES GENERALES -->
+    <script src="js/comun.js"></script>
+
+</body>
+</html>

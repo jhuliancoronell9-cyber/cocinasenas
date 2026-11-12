@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Listo para cocinar | CocinaSeñas</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="contenedor encabezado">
+
+        <a href="index.html" class="logo">
+            COCINASEÑAS
+        </a>
+
+        <nav class="navegacion">
+            <a href="index.html">Inicio</a>
+            <a href="diccionario.html">Diccionario</a>
+            <a href="ensename.html">Enséñame</a>
+        </nav>
+
+    </header>
+
+
+    <!-- CONTENIDO DEL JUEGO -->
+    <main class="contenedor seccion-pagina">
+
+        <!-- PRESENTACIÓN -->
+        <section style="text-align:center;">
+
+            <h1 class="titulo-principal">
+                ¡LISTO PARA COCINAR!
+            </h1>
+
+            <p class="subtitulo">
+                Reconoce las señas y arma el platillo de cada cliente.
+            </p>
+
+            <img
+                src="personajes/chef-dorado.svg"
+                alt="Chef Dorado"
+                class="personaje"
+                style="margin:15px auto;"
+            >
+
+        </section>
+
+
+        <!-- PANTALLA DE BIENVENIDA -->
+        <section id="pantallaInicio" class="panel-juego">
+
+            <h2 class="titulo-seccion">
+                ¿ACEPTAS EL RETO?
+            </h2>
+
+            <p>
+                Atenderás a 2 clientes. Cada uno pide un platillo de
+                5 partes: entrada, plato fuerte, acompañamiento,
+                bebida y postre.
+            </p>
+
+            <p style="margin-top:15px;">
+                En cada ronda mira la seña y elige el ingrediente
+                correcto. Cada acierto vale 10 puntos.
+            </p>
+
+            <p style="margin-top:15px;">
+                Al terminar cada platillo, el cliente te dirá con una
+                seña qué le pareció. Si la reconoces, ganas 5 puntos
+                de propina.
+            </p>
+
+            <p style="margin-top:15px; color:var(--dorado);">
+                10 rondas · hasta 100 puntos + 10 de propina
+            </p>
+
+            <button
+                id="botonIniciar"
+                class="boton boton-pulso"
+                style="margin-top:25px;">
+                COMENZAR JUEGO
+            </button>
+
+        </section>
+
+
+        <!-- PANTALLA PRINCIPAL DE LA PARTIDA -->
+        <section id="pantallaJuego" class="panel-juego oculto">
+
+            <!-- INFORMACIÓN -->
+            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+
+                <p id="numeroPedido">
+                    CLIENTE 1 / 2
+                </p>
+
+                <p id="numeroRonda">
+                    RONDA 1 / 10
+                </p>
+
+                <p id="puntuacion">
+                    PUNTOS: 0
+                </p>
+
+            </div>
+
+
+            <!-- PROGRESO -->
+            <div class="progreso">
+
+                <div
+                    id="barraProgreso"
+                    class="progreso-barra">
+                </div>
+
+            </div>
+
+
+            <!-- CLIENTE Y PEDIDO -->
+            <div class="mostrador">
+
+                <img
+                    id="imagenCliente"
+                    src="personajes/cliente-hambriento.svg"
+                    alt="Cliente"
+                    class="personaje-mini"
+                >
+
+                <div class="globo" id="textoPedido" aria-live="polite">
+                </div>
+
+            </div>
+
+
+            <!-- BANDEJA DONDE SE ARMA EL PLATILLO -->
+            <div
+                id="bandeja"
+                class="bandeja"
+                aria-label="Platillo que estás armando">
+            </div>
+
+
+            <!-- PREGUNTA -->
+            <h2 id="preguntaRonda" class="titulo-seccion" style="margin-top:25px;">
+            </h2>
+
+
+            <!-- VIDEO -->
+            <div style="max-width:520px; margin:20px auto;">
+
+                <video
+                    id="videoPregunta"
+                    class="video-alimento"
+                    controls
+                    playsinline
+                    preload="metadata">
+
+                    Tu navegador no puede reproducir este video.
+
+                </video>
+
+            </div>
+
+
+            <p id="ayudaRonda" style="color:var(--gris);">
+            </p>
+
+
+            <!-- OPCIONES -->
+            <div
+                id="opcionesRespuesta"
+                class="opciones-juego">
+            </div>
+
+
+            <!-- MENSAJE DE RESPUESTA -->
+            <div
+                id="mensajeRespuesta"
+                class="mensaje oculto"
+                aria-live="polite">
+            </div>
+
+
+            <!-- CONTINUAR -->
+            <button
+                id="botonContinuar"
+                class="boton oculto"
+                style="margin-top:20px;">
+
+                SIGUIENTE RONDA
+
+            </button>
+
+        </section>
+
+
+        <!-- RESULTADOS -->
+        <section id="pantallaResultado" class="panel-juego oculto">
+
+            <h2 class="titulo-seccion">
+                ¡PARTIDA TERMINADA!
+            </h2>
+
+            <img
+                src="personajes/chef-lila-celebrando.svg"
+                alt="Chef Lila celebrando"
+                class="personaje"
+                style="margin:15px auto;"
+            >
+
+            <p style="font-size:22px; color:var(--dorado);">
+                TU PUNTUACIÓN
+            </p>
+
+            <h2
+                id="resultadoPuntos"
+                style="font-size:45px; color:var(--dorado-claro); margin:15px;">
+                0 / 110
+            </h2>
+
+            <p id="resumenPuntos" class="resumen-puntos"></p>
+
+            <p id="mensajeFinal" style="margin-top:12px;"></p>
+
+
+            <!-- PLATILLOS ARMADOS -->
+            <h2 class="titulo-seccion" style="margin-top:35px;">
+                ¡TUS PLATILLOS!
+            </h2>
+
+            <div id="menuFinal" class="platillos-final">
+
+            </div>
+
+
+            <p style="margin-top:20px; color:var(--gris);">
+                Las partes sin completar son los ingredientes
+                que no reconociste. Repasa sus señas en el diccionario.
+            </p>
+
+
+            <!-- BOTONES -->
+            <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:30px;">
+
+                <button
+                    id="botonReiniciar"
+                    class="boton">
+
+                    JUGAR OTRA VEZ
+
+                </button>
+
+                <a href="diccionario.html" class="boton boton-secundario">
+                    IR AL DICCIONARIO
+                </a>
+
+                <a href="index.html" class="boton boton-secundario">
+                    VOLVER AL INICIO
+                </a>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+
+        <p>
+            COCINASEÑAS © <span class="anio-actual">2026</span>
+        </p>
+
+        <p>
+            Aprende, reconoce y disfruta.
+        </p>
+
+    </footer>
+
+
+    <!-- ARCHIVOS JAVASCRIPT -->
+    <script src="js/alimentos.js"></script>
+    <script src="js/comun.js"></script>
+
+
+    <!-- LÓGICA DEL JUEGO -->
+    <script>
+
+        /* =====================================
+           CONFIGURACIÓN DEL JUEGO
+
+           Una partida = 2 clientes.
+           Cada cliente pide 5 ingredientes (una ronda por
+           ingrediente) y luego reacciona con una seña.
+           10 rondas x 10 puntos = 100 puntos
+           + 2 propinas x 5 puntos = 10 puntos extra
+        ===================================== */
+
+        const TOTAL_PEDIDOS = 2;
+        const PUNTOS_CORRECTOS = 10;
+        const PUNTOS_PROPINA = 5;
+
+        const PARTES_POR_PLATILLO = ROLES_PLATILLO.length;
+        const TOTAL_RONDAS = TOTAL_PEDIDOS * PARTES_POR_PLATILLO;
+        const TOTAL_PASOS = TOTAL_RONDAS + TOTAL_PEDIDOS;
+        const PUNTOS_MAXIMOS =
+            TOTAL_RONDAS * PUNTOS_CORRECTOS + TOTAL_PEDIDOS * PUNTOS_PROPINA;
+
+        let pasos = [];
+        let platillos = [];
+        let pasoActual = 0;
+        let puntuacion = 0;
+
+        let respuestaSeleccionada = false;
+
+
+        /* =====================================
+           ELEMENTOS HTML
+        ===================================== */
+
+        const pantallaInicio =
+            document.getElementById("pantallaInicio");
+
+        const pantallaJuego =
+            document.getElementById("pantallaJuego");
+
+        const pantallaResultado =
+            document.getElementById("pantallaResultado");
+
+        const videoPregunta =
+            document.getElementById("videoPregunta");
+
+        const opcionesRespuesta =
+            document.getElementById("opcionesRespuesta");
+
+        const mensajeRespuesta =
+            document.getElementById("mensajeRespuesta");
+
+        const botonContinuar =
+            document.getElementById("botonContinuar");
+
+        const bandeja =
+            document.getElementById("bandeja");
+
+        const imagenCliente =
+            document.getElementById("imagenCliente");
+
+
+        /* =====================================
+           PREPARAR LA PARTIDA
+           Cada pedido usa un ingrediente distinto por rol.
+        ===================================== */
+
+        function prepararPasos() {
+
+            const lista = [];
+
+            // Para cada rol se mezclan sus ingredientes y
+            // cada cliente recibe uno diferente.
+            const mezclaPorRol = ROLES_PLATILLO.map(rol =>
+                mezclarLista(obtenerAlimentosDeRol(rol))
+            );
+
+            const reacciones = mezclarLista(obtenerReacciones());
+
+            for (let pedido = 0; pedido < TOTAL_PEDIDOS; pedido++) {
+
+                ROLES_PLATILLO.forEach((rol, indice) => {
+
+                    lista.push({
+                        tipo: "ingrediente",
+                        pedido: pedido,
+                        indiceRol: indice,
+                        rol: rol,
+                        correcto: mezclaPorRol[indice][pedido]
+                    });
+
+                });
+
+                lista.push({
+                    tipo: "reaccion",
+                    pedido: pedido,
+                    correcto: reacciones[pedido % reacciones.length]
+                });
+
+            }
+
+            return lista;
+
+        }
+
+
+        /* =====================================
+           INICIAR PARTIDA
+        ===================================== */
+
+        function iniciarJuego() {
+
+            if (alimentos.length < 4) {
+                alert("Se necesitan al menos cuatro alimentos.");
+                return;
+            }
+
+            pasos = prepararPasos();
+
+            platillos = [];
+
+            for (let i = 0; i < TOTAL_PEDIDOS; i++) {
+
+                platillos.push({
+                    partes: new Array(PARTES_POR_PLATILLO).fill(null),
+                    fallos: new Array(PARTES_POR_PLATILLO).fill(false),
+                    aciertos: 0,
+                    reaccion: null
+                });
+
+            }
+
+            pasoActual = 0;
+            puntuacion = 0;
+
+            pantallaInicio.classList.add("oculto");
+            pantallaResultado.classList.add("oculto");
+            pantallaJuego.classList.remove("oculto");
+
+            mostrarPaso();
+
+        }
+
+
+        /* =====================================
+           DIBUJAR LA BANDEJA DEL PLATILLO
+           activo = posición que se está pidiendo (o -1)
+        ===================================== */
+
+        function dibujarBandeja(contenedor, platillo, activo) {
+
+            contenedor.innerHTML = "";
+
+            ROLES_PLATILLO.forEach((rol, indice) => {
+
+                const hueco = document.createElement("div");
+
+                hueco.className = "hueco";
+
+                const alimento = platillo.partes[indice];
+
+                let contenido = `
+                    <span class="hueco-icono" aria-hidden="true">${rol.icono}</span>
+                    <span class="hueco-titulo">${rol.titulo}</span>
+                `;
+
+                if (alimento) {
+
+                    hueco.classList.add("lleno");
+
+                    contenido = `
+                        <img
+                            src="${obtenerImagenAlimento(alimento)}"
+                            alt="${alimento.nombre}"
+                            onerror="imagenNoDisponible(this)"
+                        >
+                        <span class="hueco-titulo">${rol.titulo}</span>
+                        <span class="hueco-nombre">${alimento.nombre}</span>
+                    `;
+
+                } else if (platillo.fallos[indice]) {
+
+                    hueco.classList.add("fallado");
+
+                    contenido += `<span class="hueco-nombre">Sin completar</span>`;
+
+                } else if (indice === activo) {
+
+                    hueco.classList.add("activo");
+
+                }
+
+                hueco.setAttribute("aria-label", rol.titulo);
+
+                hueco.innerHTML = contenido;
+
+                contenedor.appendChild(hueco);
+
+            });
+
+        }
+
+
+        /* =====================================
+           MOSTRAR UN PASO (INGREDIENTE O REACCIÓN)
+        ===================================== */
+
+        function mostrarPaso() {
+
+            respuestaSeleccionada = false;
+
+            mensajeRespuesta.classList.add("oculto");
+            botonContinuar.classList.add("oculto");
+
+            opcionesRespuesta.innerHTML = "";
+
+            const paso = pasos[pasoActual];
+            const platillo = platillos[paso.pedido];
+            const correcto = paso.correcto;
+
+            const rondasHechas = pasos
+                .slice(0, pasoActual)
+                .filter(p => p.tipo === "ingrediente").length;
+
+
+            // INFORMACIÓN GENERAL
+
+            document.getElementById("numeroPedido").textContent =
+                `CLIENTE ${paso.pedido + 1} / ${TOTAL_PEDIDOS}`;
+
+            document.getElementById("numeroRonda").textContent =
+                paso.tipo === "ingrediente"
+                    ? `RONDA ${rondasHechas + 1} / ${TOTAL_RONDAS}`
+                    : "PROPINA";
+
+            document.getElementById("puntuacion").textContent =
+                `PUNTOS: ${puntuacion}`;
+
+            actualizarProgreso("barraProgreso", pasoActual, TOTAL_PASOS);
+
+
+            // CARGAR VIDEO (en bucle y sin sonido para verlo varias veces)
+
+            videoPregunta.pause();
+
+            videoPregunta.src = obtenerVideoSena(correcto);
+
+            videoPregunta.muted = true;
+            videoPregunta.loop = true;
+
+            videoPregunta.load();
+
+            const reproduccion = videoPregunta.play();
+
+            if (reproduccion && reproduccion.catch) {
+                reproduccion.catch(() => {});
+            }
+
+
+            // PREPARAR LA ESCENA SEGÚN EL TIPO DE PASO
+
+            let candidatos;
+
+            if (paso.tipo === "ingrediente") {
+
+                imagenCliente.src = "personajes/cliente-hambriento.svg";
+
+                document.getElementById("textoPedido").innerHTML = `
+                    ¡Hola! Quiero un platillo completo.
+                    Ahora necesito: <strong>${paso.rol.titulo}</strong>.
+                `;
+
+                dibujarBandeja(bandeja, platillo, paso.indiceRol);
+
+                document.getElementById("preguntaRonda").textContent =
+                    `¿QUÉ ${paso.rol.titulo} PIDE EL CLIENTE?`;
+
+                document.getElementById("ayudaRonda").textContent =
+                    "Observa la seña y elige el ingrediente correcto.";
+
+                candidatos = obtenerAlimentosDeRol(paso.rol);
+
+                opcionesRespuesta.classList.remove("tres");
+
+            } else {
+
+                imagenCliente.src = "personajes/cliente.svg";
+
+                document.getElementById("textoPedido").innerHTML = `
+                    ¡El cliente probó tu platillo y te dice algo
+                    con señas!
+                `;
+
+                dibujarBandeja(bandeja, platillo, -1);
+
+                document.getElementById("preguntaRonda").textContent =
+                    "¿QUÉ DICE EL CLIENTE?";
+
+                document.getElementById("ayudaRonda").textContent =
+                    "Observa la seña y elige qué expresa. Ganas 5 puntos de propina.";
+
+                candidatos = obtenerReacciones();
+
+                opcionesRespuesta.classList.add("tres");
+
+            }
+
+
+            // CREAR LAS OPCIONES
+            // (3 incorrectas del mismo rol + la correcta, o las 3 reacciones)
+
+            const incorrectas = mezclarLista(
+                candidatos.filter(
+                    alimento => alimento.archivo !== correcto.archivo
+                )
+            );
+
+            const cantidadIncorrectas =
+                paso.tipo === "ingrediente" ? 3 : incorrectas.length;
+
+            const opciones = mezclarLista([
+                correcto,
+                ...incorrectas.slice(0, cantidadIncorrectas)
+            ]);
+
+
+            // MOSTRAR OPCIONES
+
+            opciones.forEach(alimento => {
+
+                const boton = document.createElement("button");
+
+                boton.type = "button";
+                boton.className = "opcion-juego";
+                boton.dataset.archivo = alimento.archivo;
+
+                boton.innerHTML = `
+
+                    <img
+                        src="${obtenerImagenAlimento(alimento)}"
+                        alt="Imagen de ${alimento.nombre}"
+                        onerror="imagenNoDisponible(this)"
+                    >
+
+                    <p style="margin-top:10px;">
+                        ${alimento.nombre}
+                    </p>
+
+                `;
+
+                boton.addEventListener("click", () => {
+
+                    comprobarRespuesta(alimento, boton);
+
+                });
+
+                opcionesRespuesta.appendChild(boton);
+
+            });
+
+        }
+
+
+        /* =====================================
+           COMPROBAR RESPUESTA
+        ===================================== */
+
+        function comprobarRespuesta(elegida, botonElegido) {
+
+            if (respuestaSeleccionada) return;
+
+            respuestaSeleccionada = true;
+
+            const paso = pasos[pasoActual];
+            const platillo = platillos[paso.pedido];
+            const correcta = paso.correcto;
+
+            const esCorrecta =
+                elegida.archivo === correcta.archivo;
+
+
+            // DESACTIVAR OPCIONES
+
+            const botones =
+                opcionesRespuesta.querySelectorAll("button");
+
+            botones.forEach(boton => {
+
+                boton.disabled = true;
+
+                if (boton.dataset.archivo === correcta.archivo) {
+
+                    boton.classList.add("correcta");
+
+                }
+
+            });
+
+            if (!esCorrecta) {
+
+                botonElegido.classList.add("incorrecta");
+
+            }
+
+
+            let texto = "";
+            let chef = "";
+
+            if (paso.tipo === "ingrediente") {
+
+                // RESPUESTA A UN INGREDIENTE
+
+                if (esCorrecta) {
+
+                    puntuacion += PUNTOS_CORRECTOS;
+
+                    platillo.partes[paso.indiceRol] = correcta;
+                    platillo.aciertos++;
+
+                    texto =
+                        `¡Correcto! Agregaste ${correcta.nombre} al platillo. +${PUNTOS_CORRECTOS} puntos.`;
+
+                    chef = "personajes/chef-dorado-aprobando.svg";
+
+                    mensajeRespuesta.style.border = "2px solid #76b900";
+
+                } else {
+
+                    platillo.fallos[paso.indiceRol] = true;
+
+                    texto =
+                        `¡Buen intento! La seña era ${correcta.nombre}. Esa parte del platillo queda sin completar.`;
+
+                    chef = "personajes/chef-lila-animando.svg";
+
+                    mensajeRespuesta.style.border = "2px solid #e6b94f";
+
+                }
+
+                dibujarBandeja(bandeja, platillo, -1);
+
+            } else {
+
+                // RESPUESTA A LA REACCIÓN DEL CLIENTE
+
+                platillo.reaccion = esCorrecta;
+
+                if (esCorrecta) {
+
+                    puntuacion += PUNTOS_PROPINA;
+
+                    texto =
+                        `¡Correcto! El cliente dijo "${correcta.nombre}". +${PUNTOS_PROPINA} puntos de propina.`;
+
+                    chef = "personajes/chef-dorado-aprobando.svg";
+
+                    mensajeRespuesta.style.border = "2px solid #76b900";
+
+                } else {
+
+                    texto =
+                        `¡Buen intento! El cliente dijo "${correcta.nombre}".`;
+
+                    chef = "personajes/chef-lila-animando.svg";
+
+                    mensajeRespuesta.style.border = "2px solid #e6b94f";
+
+                }
+
+                // El cliente reacciona según qué tan completo quedó el platillo
+
+                imagenCliente.src =
+                    platillo.aciertos >= 3
+                        ? "personajes/cliente-feliz.svg"
+                        : "personajes/cliente-decepcionado.svg";
+
+            }
+
+
+            mensajeRespuesta.innerHTML = `
+                <div class="mensaje-chef">
+                    <img src="${chef}" alt="" class="personaje-mini">
+                    <p>${texto}</p>
+                </div>
+            `;
+
+            mensajeRespuesta.classList.remove("oculto");
+
+            document.getElementById("puntuacion").textContent =
+                `PUNTOS: ${puntuacion}`;
+
+
+            // CAMBIAR TEXTO DEL BOTÓN
+
+            if (pasoActual === TOTAL_PASOS - 1) {
+
+                botonContinuar.textContent = "VER RESULTADOS";
+
+            } else if (paso.tipo === "reaccion") {
+
+                botonContinuar.textContent = "SIGUIENTE CLIENTE";
+
+            } else {
+
+                botonContinuar.textContent = "SIGUIENTE RONDA";
+
+            }
+
+            botonContinuar.classList.remove("oculto");
+
+        }
+
+
+        /* =====================================
+           SIGUIENTE PASO
+        ===================================== */
+
+        function siguienteRonda() {
+
+            pasoActual++;
+
+            if (pasoActual < TOTAL_PASOS) {
+
+                mostrarPaso();
+
+            } else {
+
+                finalizarJuego();
+
+            }
+
+        }
+
+
+        /* =====================================
+           FINALIZAR PARTIDA
+        ===================================== */
+
+        function finalizarJuego() {
+
+            pantallaJuego.classList.add("oculto");
+
+            pantallaResultado.classList.remove("oculto");
+
+            videoPregunta.pause();
+
+            document.getElementById("resultadoPuntos").textContent =
+                `${puntuacion} / ${PUNTOS_MAXIMOS}`;
+
+            const aciertos = platillos.reduce(
+                (suma, platillo) => suma + platillo.aciertos, 0
+            );
+
+            const propinas = platillos.filter(
+                platillo => platillo.reaccion === true
+            ).length;
+
+            document.getElementById("resumenPuntos").textContent =
+                `Ingredientes correctos: ${aciertos} / ${TOTAL_RONDAS} · ` +
+                `Propinas: ${propinas} / ${TOTAL_PEDIDOS}`;
+
+
+            // MENSAJE SEGÚN LA PUNTUACIÓN
+
+            const porcentaje = (puntuacion / PUNTOS_MAXIMOS) * 100;
+
+            let mensaje = "";
+
+            if (puntuacion === PUNTOS_MAXIMOS) {
+
+                mensaje = "¡Excelente! ¡Reconociste todas las señas y tus clientes quedaron felices!";
+
+            } else if (porcentaje >= 70) {
+
+                mensaje = "¡Muy buen trabajo! Tienes un gran reconocimiento de las señas.";
+
+            } else if (porcentaje >= 40) {
+
+                mensaje = "¡Vas por buen camino! Sigue practicando.";
+
+            } else {
+
+                mensaje = "¡No te rindas! Consulta el diccionario y vuelve a intentarlo.";
+
+            }
+
+            document.getElementById("mensajeFinal").textContent =
+                mensaje;
+
+
+            // MOSTRAR LOS PLATILLOS ARMADOS
+
+            mostrarMenuFinal();
+
+        }
+
+
+        /* =====================================
+           MOSTRAR LOS PLATILLOS ARMADOS
+        ===================================== */
+
+        function mostrarMenuFinal() {
+
+            const contenedor =
+                document.getElementById("menuFinal");
+
+            contenedor.innerHTML = "";
+
+            platillos.forEach((platillo, indice) => {
+
+                const bloque = document.createElement("article");
+
+                bloque.className = "platillo-final";
+
+                const titulo = document.createElement("h3");
+
+                titulo.textContent =
+                    `PLATILLO DEL CLIENTE ${indice + 1} (${platillo.aciertos} / ${PARTES_POR_PLATILLO})`;
+
+                const bandejaFinal = document.createElement("div");
+
+                bandejaFinal.className = "bandeja";
+
+                dibujarBandeja(bandejaFinal, platillo, -1);
+
+                bloque.appendChild(titulo);
+                bloque.appendChild(bandejaFinal);
+
+                contenedor.appendChild(bloque);
+
+            });
+
+        }
+
+
+        /* =====================================
+           REINICIAR PARTIDA
+        ===================================== */
+
+        function reiniciarJuego() {
+
+            pantallaResultado.classList.add("oculto");
+
+            pantallaInicio.classList.remove("oculto");
+
+            videoPregunta.pause();
+
+        }
+
+
+        /* =====================================
+           EVENTOS DE LOS BOTONES
+        ===================================== */
+
+        document
+            .getElementById("botonIniciar")
+            .addEventListener("click", iniciarJuego);
+
+
+        botonContinuar.addEventListener("click", siguienteRonda);
+
+
+        document
+            .getElementById("botonReiniciar")
+            .addEventListener("click", reiniciarJuego);
+
+
+    </script>
+
+</body>
+</html>

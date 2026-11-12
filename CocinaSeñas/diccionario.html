@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Diccionario | CocinaSeñas</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="contenedor encabezado">
+
+        <a href="index.html" class="logo">
+            COCINASEÑAS
+        </a>
+
+        <nav class="navegacion">
+            <a href="index.html">Inicio</a>
+            <a href="diccionario.html">Diccionario</a>
+            <a href="ensename.html">Enséñame</a>
+        </nav>
+
+    </header>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="contenedor seccion-pagina">
+
+        <h1 class="titulo-principal">
+            DICCIONARIO
+        </h1>
+
+        <p class="subtitulo">
+            Descubre las señas del mundo de los alimentos
+        </p>
+
+        <p class="portada-descripcion" style="text-align:center;">
+            Pasa las páginas del libro. En cada una verás la imagen
+            de referencia de la seña, su video y el alimento
+            correspondiente.
+        </p>
+
+
+        <!-- PERSONAJE Y PRESENTACIÓN -->
+        <div style="text-align:center; margin:25px 0;">
+
+            <img
+                src="personajes/chef-lila.svg"
+                alt="Chef Lila"
+                class="personaje"
+            >
+
+            <p style="color:var(--dorado-claro);">
+                ¡Vamos a aprender nuevas señas!
+            </p>
+
+        </div>
+
+
+        <!-- BUSCADOR -->
+        <section>
+
+            <input
+                type="search"
+                id="buscadorAlimentos"
+                class="buscador"
+                placeholder="Buscar un alimento..."
+                autocomplete="off"
+                aria-label="Buscar en el diccionario"
+            >
+
+        </section>
+
+
+        <!-- FILTROS -->
+        <section class="filtros" aria-label="Filtros del diccionario">
+
+            <button
+                id="filtroTodos"
+                class="boton"
+                type="button"
+                onclick="filtrarLetra('todos')">
+                TODOS
+            </button>
+
+            <button
+                id="filtroAM"
+                class="boton boton-secundario"
+                type="button"
+                onclick="filtrarLetra('AM')">
+                A - M
+            </button>
+
+            <button
+                id="filtroNZ"
+                class="boton boton-secundario"
+                type="button"
+                onclick="filtrarLetra('NZ')">
+                N - Z
+            </button>
+
+        </section>
+
+
+        <!-- CONTADOR -->
+        <p
+            id="contadorAlimentos"
+            style="text-align:center; color:var(--dorado); margin:20px 0;"
+            aria-live="polite">
+            Cargando alimentos...
+        </p>
+
+
+        <!-- LIBRO -->
+        <section id="libroZona" class="libro-zona" aria-label="Libro de señas">
+
+            <!-- Navegación superior -->
+            <div class="libro-nav">
+                <button type="button" class="boton boton-secundario libro-anterior" aria-label="Página anterior">◀</button>
+                <span class="libro-indicador"></span>
+                <button type="button" class="boton boton-secundario libro-siguiente" aria-label="Página siguiente">▶</button>
+            </div>
+
+            <!-- Página actual (aquí se dibuja cada palabra) -->
+            <div id="listaAlimentos" class="libro" aria-live="polite">
+            </div>
+
+            <!-- Navegación inferior -->
+            <div class="libro-nav">
+                <button type="button" class="boton boton-secundario libro-anterior" aria-label="Página anterior">◀ ANTERIOR</button>
+                <span class="libro-indicador"></span>
+                <button type="button" class="boton libro-siguiente" aria-label="Página siguiente">SIGUIENTE ▶</button>
+            </div>
+
+            <div class="progreso" aria-hidden="true">
+                <div id="barraLibro" class="progreso-barra"></div>
+            </div>
+
+            <p style="text-align:center; color:var(--gris); font-size:13px;">
+                Usa los botones, desliza con el dedo o las flechas del teclado.
+            </p>
+
+        </section>
+
+
+        <!-- MENSAJE CUANDO NO HAY RESULTADOS -->
+        <div
+            id="sinResultados"
+            class="mensaje oculto"
+            style="margin-top:25px;">
+
+            No encontramos resultados. Intenta con otra palabra.
+
+        </div>
+
+
+        <!-- REGRESAR -->
+        <div style="text-align:center; margin-top:40px;">
+
+            <a href="index.html" class="boton boton-secundario">
+                VOLVER AL INICIO
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie-pagina">
+
+        <p>COCINASEÑAS © <span class="anio-actual">2026</span></p>
+
+        <p>Aprende, reconoce y disfruta.</p>
+
+    </footer>
+
+
+    <!-- ARCHIVOS JAVASCRIPT -->
+    <script src="js/alimentos.js"></script>
+    <script src="js/comun.js"></script>
+
+
+    <!-- FUNCIONAMIENTO DEL DICCIONARIO -->
+    <script>
+
+        // FILTRO ACTUAL, LISTA MOSTRADA Y PÁGINA ACTUAL
+        let filtroActual = "todos";
+        let listaActual = [];
+        let paginaActual = 0;
+        let volteando = false;
+
+
+        // DIBUJAR UNA PÁGINA DEL LIBRO
+        function dibujarPagina() {
+
+            const contenedor = document.getElementById("listaAlimentos");
+
+            const alimento = listaActual[paginaActual];
+
+            const imagenSena = obtenerImagenSena(alimento);
+            const imagenComida = obtenerImagenAlimento(alimento);
+            const videoSena = obtenerVideoSena(alimento);
+
+            contenedor.innerHTML = `
+
+                <article class="libro-pagina">
+
+                    <h3 class="libro-titulo">${alimento.nombre}</h3>
+
+                    <p class="libro-categoria">${alimento.categoria}</p>
+
+                    <div class="libro-bloque">
+
+                        <h4>IMAGEN DE LA SEÑA</h4>
+
+                        <img
+                            src="${imagenSena}"
+                            alt="Referencia visual de la seña de ${alimento.nombre}"
+                            class="imagen-alimento"
+                            onerror="imagenNoDisponible(this)"
+                        >
+
+                    </div>
+
+                    <div class="libro-bloque">
+
+                        <h4>VIDEO DE LA SEÑA</h4>
+
+                        <video
+                            class="video-alimento"
+                            controls
+                            preload="none"
+                            playsinline
+                            aria-label="Video de la seña de ${alimento.nombre}">
+
+                            <source src="${videoSena}" type="video/mp4">
+
+                            Tu navegador no puede reproducir este video.
+
+                        </video>
+
+                    </div>
+
+                    <hr class="separador-dorado">
+
+                    <div class="libro-bloque">
+
+                        <h4>ALIMENTO O ELEMENTO</h4>
+
+                        <img
+                            src="${imagenComida}"
+                            alt="Imagen de ${alimento.nombre}"
+                            class="imagen-alimento"
+                            onerror="imagenNoDisponible(this)"
+                        >
+
+                    </div>
+
+                    <p class="libro-numero">— ${paginaActual + 1} —</p>
+
+                </article>
+
+            `;
+
+            actualizarControles();
+
+        }
+
+
+        // INDICADOR, BOTONES Y BARRA DE PROGRESO
+        function actualizarControles() {
+
+            const total = listaActual.length;
+
+            document.querySelectorAll(".libro-indicador").forEach(indicador => {
+
+                indicador.textContent = `${paginaActual + 1} / ${total}`;
+
+            });
+
+            document.querySelectorAll(".libro-anterior").forEach(boton => {
+
+                boton.disabled = paginaActual === 0;
+
+            });
+
+            document.querySelectorAll(".libro-siguiente").forEach(boton => {
+
+                boton.disabled = paginaActual === total - 1;
+
+            });
+
+            actualizarProgreso("barraLibro", paginaActual + 1, total);
+
+        }
+
+
+        // PASAR LA PÁGINA CON ANIMACIÓN
+        function cambiarPagina(direccion) {
+
+            const destino = paginaActual + direccion;
+
+            if (volteando || destino < 0 || destino >= listaActual.length) return;
+
+            const pagina = document.querySelector("#listaAlimentos .libro-pagina");
+
+            const sentido = direccion > 0 ? "sig" : "ant";
+
+            volteando = true;
+
+            pagina.classList.add(`sale-${sentido}`);
+
+            setTimeout(() => {
+
+                paginaActual = destino;
+
+                dibujarPagina();
+
+                const nueva = document.querySelector("#listaAlimentos .libro-pagina");
+
+                nueva.classList.add(`entra-${sentido}`);
+
+                setTimeout(() => {
+
+                    nueva.classList.remove(`entra-${sentido}`);
+
+                    volteando = false;
+
+                }, 300);
+
+            }, 220);
+
+        }
+
+
+        // MOSTRAR UNA LISTA EN EL LIBRO
+        function mostrarAlimentos(lista) {
+
+            const zona = document.getElementById("libroZona");
+            const contador = document.getElementById("contadorAlimentos");
+            const mensaje = document.getElementById("sinResultados");
+
+            listaActual = lista;
+            paginaActual = 0;
+            volteando = false;
+
+            contador.textContent =
+                `${lista.length} términos encontrados`;
+
+            if (lista.length === 0) {
+
+                zona.classList.add("oculto");
+                mensaje.classList.remove("oculto");
+                return;
+
+            }
+
+            mensaje.classList.add("oculto");
+            zona.classList.remove("oculto");
+
+            dibujarPagina();
+
+        }
+
+
+        // APLICAR FILTRO DE LETRAS
+        function filtrarLetra(filtro) {
+
+            filtroActual = filtro;
+
+            const botones = {
+                todos: "filtroTodos",
+                AM: "filtroAM",
+                NZ: "filtroNZ"
+            };
+
+            Object.entries(botones).forEach(([clave, id]) => {
+
+                document
+                    .getElementById(id)
+                    .classList.toggle("boton-secundario", clave !== filtro);
+
+            });
+
+            aplicarFiltros();
+
+        }
+
+
+        // BUSCADOR Y FILTROS
+        function aplicarFiltros() {
+
+            const texto = normalizarTexto(
+                document.getElementById("buscadorAlimentos").value
+            );
+
+            let resultado = alimentos.filter(alimento => {
+
+                const nombre = normalizarTexto(alimento.nombre);
+
+                const coincideBusqueda = nombre.includes(texto);
+
+                let coincideLetra = true;
+
+                const inicial = normalizarTexto(alimento.nombre)
+                    .charAt(0);
+
+                if (filtroActual === "AM") {
+
+                    coincideLetra = inicial >= "a" && inicial <= "m";
+
+                }
+
+                if (filtroActual === "NZ") {
+
+                    coincideLetra = inicial >= "n" && inicial <= "z";
+
+                }
+
+                return coincideBusqueda && coincideLetra;
+
+            });
+
+
+            mostrarAlimentos(resultado);
+
+        }
+
+
+        // ESCUCHAR EL BUSCADOR
+        document
+            .getElementById("buscadorAlimentos")
+            .addEventListener("input", aplicarFiltros);
+
+
+        // BOTONES DE NAVEGACIÓN
+        document.querySelectorAll(".libro-anterior").forEach(boton => {
+
+            boton.addEventListener("click", () => cambiarPagina(-1));
+
+        });
+
+        document.querySelectorAll(".libro-siguiente").forEach(boton => {
+
+            boton.addEventListener("click", () => cambiarPagina(1));
+
+        });
+
+
+        // TECLADO (no interfiere con el buscador)
+        document.addEventListener("keydown", evento => {
+
+            const escribiendo = evento.target.matches("input, textarea");
+
+            if (escribiendo) return;
+
+            if (evento.key === "ArrowRight") cambiarPagina(1);
+
+            if (evento.key === "ArrowLeft") cambiarPagina(-1);
+
+        });
+
+
+        // DESLIZAR CON EL DEDO
+        let toqueX = 0;
+        let toqueY = 0;
+
+        const libro = document.getElementById("listaAlimentos");
+
+        libro.addEventListener("touchstart", evento => {
+
+            toqueX = evento.changedTouches[0].clientX;
+            toqueY = evento.changedTouches[0].clientY;
+
+        }, { passive: true });
+
+        libro.addEventListener("touchend", evento => {
+
+            const dx = evento.changedTouches[0].clientX - toqueX;
+            const dy = evento.changedTouches[0].clientY - toqueY;
+
+            if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+
+                cambiarPagina(dx < 0 ? 1 : -1);
+
+            }
+
+        }, { passive: true });
+
+
+        // CARGAR EL DICCIONARIO
+        document.addEventListener("DOMContentLoaded", () => {
+
+            mostrarAlimentos(alimentos);
+
+        });
+
+    </script>
+
+</body>
+</html>
