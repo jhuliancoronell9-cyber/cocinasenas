@@ -47,7 +47,7 @@
 
         <p class="portada-descripcion" style="text-align:center;">
             Pasa las páginas del libro. En cada una verás la imagen
-            de referencia de la seña, su video y el alimento
+            de referencia de la seña, su GIF y el alimento
             correspondiente.
         </p>
 
@@ -211,7 +211,7 @@
 
             const imagenSena = obtenerImagenSena(alimento);
             const imagenComida = obtenerImagenAlimento(alimento);
-            const videoSena = obtenerVideoSena(alimento);
+            const videoSena = obtenerGifSena(alimento);
 
             contenedor.innerHTML = `
 
@@ -220,6 +220,8 @@
                     <h3 class="libro-titulo">${alimento.nombre}</h3>
 
                     <p class="libro-categoria">${alimento.categoria}</p>
+
+                    <div class="libro-fila">
 
                     <div class="libro-bloque">
 
@@ -236,20 +238,21 @@
 
                     <div class="libro-bloque">
 
-                        <h4>VIDEO DE LA SEÑA</h4>
+                        <h4>GIF DE LA SEÑA</h4>
 
-                        <video
-                            class="video-alimento"
-                            controls
-                            preload="none"
-                            playsinline
-                            aria-label="Video de la seña de ${alimento.nombre}">
+                        <div class="marco-sena">
 
-                            <source src="${videoSena}" type="video/mp4">
+                            <img
+                                class="gif-sena"
+                                src="${videoSena}"
+                                alt="Seña de ${alimento.nombre} en GIF"
+                                loading="lazy"
+                                onerror="this.classList.add('roto')"
+                            >
 
-                            Tu navegador no puede reproducir este video.
+                            <div class="sin-recurso">Falta el GIF de ${alimento.nombre}</div>
 
-                        </video>
+                        </div>
 
                     </div>
 
@@ -265,6 +268,8 @@
                             class="imagen-alimento"
                             onerror="imagenNoDisponible(this)"
                         >
+
+                    </div>
 
                     </div>
 
