@@ -45,15 +45,20 @@ const alimentos = [
 ========================================= */
 
 function obtenerImagenSena(alimento) {
-    return `Contenido/señas/señas_${alimento.archivo}.png`;
+    return `contenido/señas/señas_${alimento.archivo}.png`;
 }
 
 function obtenerImagenAlimento(alimento) {
-    return `Contenido/alimentos/alimentos_${alimento.archivo}.png`;
+    return `contenido/alimentos/alimentos_${alimento.archivo}.png`;
 }
 
+// Estos dos GIFs están guardados en la carpeta contenido/señas.
+// Si algún día los mueves a contenido/videos, quita su nombre de esta lista.
+const gifsEnCarpetaSenas = ["PONQUE_TORTA", "VERDURA"];
+
 function obtenerGifSena(alimento) {
-    return `Contenido/videos/videos_${alimento.archivo}.gif`;
+    const carpeta = gifsEnCarpetaSenas.includes(alimento.archivo) ? "señas" : "videos";
+    return `contenido/${carpeta}/videos_${alimento.archivo}.gif`;
 }
 
 // Se conserva el nombre anterior para no romper otras páginas
