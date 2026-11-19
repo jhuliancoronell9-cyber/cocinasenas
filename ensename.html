@@ -57,9 +57,9 @@
             >
 
             <p class="portada-descripcion">
-                ¡Bienvenido a la cocina! Aquí aprenderás cómo reconocer
-                las señas de los alimentos y usarlas para armar el
-                platillo que pide cada cliente.
+                ¡Bienvenido a la barra! Aquí aprenderás cómo reconocer
+                las señas de los alimentos para servir el platillo
+                que pide cada cliente.
             </p>
 
         </section>
@@ -85,7 +85,7 @@
                     </h3>
 
                     <p>
-                        Cada cliente quiere un platillo de 5 partes: entrada, plato fuerte, acompañamiento, bebida y postre. Te pedirá una parte a la vez, y la bandeja te muestra cómo va quedando.
+                        Cada cliente quiere un platillo de 5 partes: entrada, plato fuerte, acompañamiento, bebida y postre. Te dirá qué quiere comer, con su foto y su nombre, una parte a la vez. La bandeja te muestra cómo va quedando.
                     </p>
 
                 </div>
@@ -100,11 +100,11 @@
                 <div>
 
                     <h3 style="color:var(--dorado);">
-                        OBSERVA LA SEÑA
+                        LEVANTA LOS BOWLS
                     </h3>
 
                     <p>
-                        En cada ronda aparecerá un video con la seña del ingrediente que el cliente necesita. Míralo las veces que quieras: el video se repite solo.
+                        Sobre la barra hay platillos tapados con bowls. Toca un bowl para levantarlo y ver la seña que esconde, en un GIF que se repite solo. Solo un bowl puede estar levantado a la vez: si abres otro, el anterior se tapa de nuevo.
                     </p>
 
                 </div>
@@ -119,11 +119,11 @@
                 <div>
 
                     <h3 style="color:var(--dorado);">
-                        ELIGE EL INGREDIENTE
+                        SIRVE EL CORRECTO
                     </h3>
 
                     <p>
-                        Encontrarás cuatro opciones de la misma parte del platillo. Elige la imagen que corresponde a la seña. Si aciertas, el ingrediente se agrega a la bandeja.
+                        Hay cuatro bowls de la misma parte del platillo. Cuando encuentres la seña que corresponde a lo que pidió el cliente, toca «Servir este». Si aciertas, el ingrediente se agrega a la bandeja. Después, todos los bowls se levantan para que repases cada seña.
                     </p>
 
                 </div>
@@ -157,11 +157,11 @@
                 <div>
 
                     <h3 style="color:var(--dorado);">
-                        LEE LA REACCIÓN DEL CLIENTE
+                        ESCUCHA LA REACCIÓN DEL CLIENTE
                     </h3>
 
                     <p>
-                        Cuando terminas un platillo, el cliente te dice con una seña qué le pareció: RICO, OLER o LLENO. Si la reconoces, ganas 5 puntos de propina.
+                        Cuando terminas un platillo, el cliente te dice qué le pareció: RICO, OLER o LLENO. Hay tres bowls y uno esconde esa seña. Si lo encuentras, ganas 5 puntos de propina.
                     </p>
 
                 </div>
@@ -200,68 +200,83 @@
             <article class="tarjeta">
 
                 <h3 style="color:var(--dorado); text-align:center;">
-                    HÍGADO CON SALSA DE TOMATE Y DE POSTRE UN PASTEL
+                    EL CLIENTE QUIERE HÍGADO DE PLATO FUERTE
                 </h3>
 
                 <p style="text-align:center; margin:15px 0;">
-                    Imagina que el cliente te pide, con señas, estas
-                    tres partes de su platillo. Por cada seña que
-                    reconozcas, esa parte llega a la bandeja.
+                    El cliente te muestra lo que quiere comer. Tú levantas
+                    los bowls de la barra hasta encontrar la seña de ese
+                    alimento.
                 </p>
 
-                <div class="tarjetas-grid">
+                <div style="display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
 
-                    <div style="text-align:center;">
+                    <img
+                        src="personajes/cliente-hambriento.svg"
+                        alt="Cliente hambriento"
+                        class="personaje-mini"
+                    >
 
-                        <p style="color:var(--dorado);">PLATO FUERTE</p>
-
-                        <img
-                            src="Contenido/alimentos/alimentos_HIGADO.png"
-                            alt="Hígado"
-                            class="imagen-alimento"
-                            style="max-width:200px;"
-                            onerror="imagenNoDisponible(this)"
-                        >
-
-                        <p style="color:var(--dorado-claro);">
-                            Hígado
-                        </p>
-
+                    <div class="globo">
+                        <div class="pedido">
+                            <div class="pedido-foto">
+                                <img
+                                    src="Contenido/alimentos/alimentos_HIGADO.png"
+                                    alt="Hígado"
+                                    onerror="imagenNoDisponible(this)"
+                                >
+                            </div>
+                            <p>
+                                ¡Hola! De <strong>PLATO FUERTE</strong> quiero:
+                                <strong style="font-size:1.25em;">Hígado</strong>
+                            </p>
+                        </div>
                     </div>
 
-                    <div style="text-align:center;">
+                </div>
 
-                        <p style="color:var(--dorado);">ACOMPAÑAMIENTO</p>
+                <div class="barra-superficie" style="margin-top:22px; border-radius:8px;">
 
-                        <img
-                            src="Contenido/alimentos/alimentos_SALSA_DE_TOMATE.png"
-                            alt="Salsa de tomate"
-                            class="imagen-alimento"
-                            style="max-width:200px;"
-                            onerror="imagenNoDisponible(this)"
-                        >
+                    <div class="ejemplo-barra">
 
-                        <p style="color:var(--dorado-claro);">
-                            Salsa de tomate
-                        </p>
+                        <!-- Bowl 1: tapado -->
+                        <div class="puesto">
+                            <div class="plato" aria-hidden="true">
+                                <span class="plato-base"></span>
+                                <img class="tapa" src="recursos/bowl.svg" alt="">
+                            </div>
+                            <p class="puesto-nombre"></p>
+                            <button class="boton servir" type="button" disabled>SERVIR ESTE</button>
+                        </div>
 
-                    </div>
+                        <!-- Bowl 2: levantado, es la seña correcta -->
+                        <div class="puesto abierto correcta">
+                            <div class="plato" aria-hidden="true">
+                                <span class="plato-base"></span>
+                                <div class="marco-sena">
+                                    <img
+                                        class="gif-sena"
+                                        src="Contenido/videos/videos_HIGADO.gif"
+                                        alt="Seña de hígado en GIF"
+                                        onerror="this.classList.add('roto')"
+                                    >
+                                    <div class="sin-recurso">Falta el GIF de hígado</div>
+                                </div>
+                                <img class="tapa" src="recursos/bowl.svg" alt="">
+                            </div>
+                            <p class="puesto-nombre">Levantado</p>
+                            <button class="boton servir" type="button">SERVIR ESTE</button>
+                        </div>
 
-                    <div style="text-align:center;">
-
-                        <p style="color:var(--dorado);">POSTRE</p>
-
-                        <img
-                            src="Contenido/alimentos/alimentos_PONQUE_TORTA.png"
-                            alt="Ponqué (torta)"
-                            class="imagen-alimento"
-                            style="max-width:200px;"
-                            onerror="imagenNoDisponible(this)"
-                        >
-
-                        <p style="color:var(--dorado-claro);">
-                            Ponqué (torta)
-                        </p>
+                        <!-- Bowl 3: tapado -->
+                        <div class="puesto">
+                            <div class="plato" aria-hidden="true">
+                                <span class="plato-base"></span>
+                                <img class="tapa" src="recursos/bowl.svg" alt="">
+                            </div>
+                            <p class="puesto-nombre"></p>
+                            <button class="boton servir" type="button" disabled>SERVIR ESTE</button>
+                        </div>
 
                     </div>
 
@@ -284,9 +299,9 @@
                     </h3>
 
                     <p>
-                        Cada parte reconocida suma 10 puntos. Cuando el
-                        platillo está listo, el cliente reacciona con una
-                        seña y, si la reconoces, ganas 5 puntos de propina.
+                        Cada parte que sirves bien suma 10 puntos. Cuando el
+                        platillo está listo, el cliente te dice qué le pareció
+                        y, si encuentras su seña, ganas 5 puntos de propina.
                     </p>
 
                 </div>
@@ -313,7 +328,9 @@
 
                 <p>★ Los ingredientes incorrectos no suman puntos y dejan esa parte sin completar.</p>
 
-                <p>★ Al terminar cada platillo, reconocer la reacción del cliente (RICO, OLER o LLENO) da 5 puntos de propina.</p>
+                <p>★ Solo un bowl puede estar levantado a la vez, y al responder se levantan todos para que repases las señas.
+
+                <p>★ Al terminar cada platillo, encontrar la seña de la reacción del cliente (RICO, OLER o LLENO) da 5 puntos de propina.</p>
 
                 <p>★ La puntuación máxima es de 110 puntos: 100 por los ingredientes y 10 de propinas.</p>
 
