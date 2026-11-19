@@ -45,7 +45,7 @@
             </h1>
 
             <p class="subtitulo">
-                Reconoce las señas y arma el platillo de cada cliente.
+                Levanta los bowls, reconoce las señas y arma el platillo de cada cliente.
             </p>
 
             <img
@@ -66,20 +66,21 @@
             </h2>
 
             <p>
-                Atenderás a 2 clientes. Cada uno pide un platillo de
-                5 partes: entrada, plato fuerte, acompañamiento,
-                bebida y postre.
+                Abriste tu barra de comidas. Atenderás a 2 clientes y cada
+                uno pide un platillo de 5 partes: entrada, plato fuerte,
+                acompañamiento, bebida y postre.
             </p>
 
             <p style="margin-top:15px;">
-                En cada ronda mira la seña y elige el ingrediente
-                correcto. Cada acierto vale 10 puntos.
+                El cliente te dirá qué quiere comer. Sobre la barra hay
+                platillos tapados con bowls: levanta uno para ver su seña
+                y sirve el que tenga la seña correcta. Cada acierto vale
+                10 puntos.
             </p>
 
             <p style="margin-top:15px;">
-                Al terminar cada platillo, el cliente te dirá con una
-                seña qué le pareció. Si la reconoces, ganas 5 puntos
-                de propina.
+                Al terminar cada platillo, el cliente te dirá cómo estuvo.
+                Encuentra la seña de esa palabra y ganas 5 puntos de propina.
             </p>
 
             <p style="margin-top:15px; color:var(--dorado);">
@@ -97,10 +98,10 @@
 
 
         <!-- PANTALLA PRINCIPAL DE LA PARTIDA -->
-        <section id="pantallaJuego" class="panel-juego oculto">
+        <section id="pantallaJuego" class="panel-juego panel-barra oculto">
 
             <!-- INFORMACIÓN -->
-            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+            <div class="info-juego">
 
                 <p id="numeroPedido">
                     CLIENTE 1 / 2
@@ -128,60 +129,72 @@
             </div>
 
 
-            <!-- CLIENTE Y PEDIDO -->
-            <div class="mostrador">
+            <!-- ESCENA: BARRA DE RESTAURANTE -->
+            <div class="escena-barra">
 
-                <img
-                    id="imagenCliente"
-                    src="personajes/cliente-hambriento.svg"
-                    alt="Cliente"
-                    class="personaje-mini"
-                >
+                <!-- Pared del fondo con el cliente -->
+                <div class="pared">
 
-                <div class="globo" id="textoPedido" aria-live="polite">
+                    <span class="lampara" aria-hidden="true"></span>
+                    <span class="lampara" aria-hidden="true"></span>
+                    <span class="letrero-neon" aria-hidden="true">ABIERTO</span>
+
+                    <div class="mostrador">
+
+                        <img
+                            id="imagenCliente"
+                            src="personajes/cliente-hambriento.svg"
+                            alt="Cliente"
+                            class="personaje-mini"
+                        >
+
+                        <div class="globo" id="textoPedido" aria-live="polite">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="barra-lado">
+
+                <!-- Barra de madera con los platillos tapados -->
+                    <div class="barra-superficie">
+    
+                        <h2 id="preguntaRonda" class="cartel-pregunta">
+                        </h2>
+    
+                        <p id="ayudaRonda" class="ayuda-barra">
+                        </p>
+    
+                        <div
+                            id="opcionesRespuesta"
+                            class="opciones-juego bowls">
+                        </div>
+    
+                    </div>
+    
+                    <div class="frente-barra" aria-hidden="true"></div>
+    
+                    <div class="taburetes" aria-hidden="true">
+                        <span class="taburete"></span>
+                        <span class="taburete"></span>
+                        <span class="taburete"></span>
+                        <span class="taburete"></span>
+                    </div>
+
                 </div>
 
             </div>
 
 
             <!-- BANDEJA DONDE SE ARMA EL PLATILLO -->
+            <p class="bandeja-titulo">TU BANDEJA</p>
+
             <div
                 id="bandeja"
                 class="bandeja"
                 aria-label="Platillo que estás armando">
-            </div>
-
-
-            <!-- PREGUNTA -->
-            <h2 id="preguntaRonda" class="titulo-seccion" style="margin-top:25px;">
-            </h2>
-
-
-            <!-- VIDEO -->
-            <div style="max-width:520px; margin:20px auto;">
-
-                <video
-                    id="videoPregunta"
-                    class="video-alimento"
-                    controls
-                    playsinline
-                    preload="metadata">
-
-                    Tu navegador no puede reproducir este video.
-
-                </video>
-
-            </div>
-
-
-            <p id="ayudaRonda" style="color:var(--gris);">
-            </p>
-
-
-            <!-- OPCIONES -->
-            <div
-                id="opcionesRespuesta"
-                class="opciones-juego">
             </div>
 
 
@@ -340,9 +353,6 @@
 
         const pantallaResultado =
             document.getElementById("pantallaResultado");
-
-        const videoPregunta =
-            document.getElementById("videoPregunta");
 
         const opcionesRespuesta =
             document.getElementById("opcionesRespuesta");
@@ -509,6 +519,10 @@
 
             respuestaSeleccionada = false;
 
+            if (pasoActual > 0) {
+                pantallaJuego.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
             mensajeRespuesta.classList.add("oculto");
             botonContinuar.classList.add("oculto");
 
@@ -539,44 +553,24 @@
             actualizarProgreso("barraProgreso", pasoActual, TOTAL_PASOS);
 
 
-            // CARGAR VIDEO (en bucle y sin sonido para verlo varias veces)
-
-            videoPregunta.pause();
-
-            videoPregunta.src = obtenerVideoSena(correcto);
-
-            videoPregunta.muted = true;
-            videoPregunta.loop = true;
-
-            videoPregunta.load();
-
-            const reproduccion = videoPregunta.play();
-
-            if (reproduccion && reproduccion.catch) {
-                reproduccion.catch(() => {});
-            }
-
-
             // PREPARAR LA ESCENA SEGÚN EL TIPO DE PASO
 
             let candidatos;
+            let textoSena;
 
             if (paso.tipo === "ingrediente") {
 
                 imagenCliente.src = "personajes/cliente-hambriento.svg";
 
-                document.getElementById("textoPedido").innerHTML = `
-                    ¡Hola! Quiero un platillo completo.
-                    Ahora necesito: <strong>${paso.rol.titulo}</strong>.
-                `;
+                document.getElementById("textoPedido").innerHTML =
+                    htmlPedido(
+                        correcto,
+                        `¡Hola! De <strong>${paso.rol.titulo}</strong> quiero:`
+                    );
 
                 dibujarBandeja(bandeja, platillo, paso.indiceRol);
 
-                document.getElementById("preguntaRonda").textContent =
-                    `¿QUÉ ${paso.rol.titulo} PIDE EL CLIENTE?`;
-
-                document.getElementById("ayudaRonda").textContent =
-                    "Observa la seña y elige el ingrediente correcto.";
+                textoSena = correcto.nombre.toUpperCase();
 
                 candidatos = obtenerAlimentosDeRol(paso.rol);
 
@@ -586,18 +580,15 @@
 
                 imagenCliente.src = "personajes/cliente.svg";
 
-                document.getElementById("textoPedido").innerHTML = `
-                    ¡El cliente probó tu platillo y te dice algo
-                    con señas!
-                `;
+                document.getElementById("textoPedido").innerHTML =
+                    htmlPedido(
+                        correcto,
+                        "¡Gracias por el platillo! Quiero decirte que estuvo:"
+                    );
 
                 dibujarBandeja(bandeja, platillo, -1);
 
-                document.getElementById("preguntaRonda").textContent =
-                    "¿QUÉ DICE EL CLIENTE?";
-
-                document.getElementById("ayudaRonda").textContent =
-                    "Observa la seña y elige qué expresa. Ganas 5 puntos de propina.";
+                textoSena = correcto.nombre.toUpperCase();
 
                 candidatos = obtenerReacciones();
 
@@ -605,9 +596,17 @@
 
             }
 
+            document.getElementById("preguntaRonda").textContent =
+                `¿CUÁL BOWL ESCONDE LA SEÑA DE ${textoSena}?`;
 
-            // CREAR LAS OPCIONES
-            // (3 incorrectas del mismo rol + la correcta, o las 3 reacciones)
+            document.getElementById("ayudaRonda").textContent =
+                paso.tipo === "ingrediente"
+                    ? "Levanta un bowl para ver su seña. Solo uno puede estar abierto. Cuando lo encuentres, sírvelo."
+                    : "Levanta un bowl para ver su seña y sirve la correcta. Ganas 5 puntos de propina.";
+
+
+            // CREAR LOS PLATILLOS TAPADOS
+            // (3 incorrectos del mismo rol + el correcto, o las 3 reacciones)
 
             const incorrectas = mezclarLista(
                 candidatos.filter(
@@ -623,40 +622,201 @@
                 ...incorrectas.slice(0, cantidadIncorrectas)
             ]);
 
+            opciones.forEach((alimento, indice) => {
 
-            // MOSTRAR OPCIONES
-
-            opciones.forEach(alimento => {
-
-                const boton = document.createElement("button");
-
-                boton.type = "button";
-                boton.className = "opcion-juego";
-                boton.dataset.archivo = alimento.archivo;
-
-                boton.innerHTML = `
-
-                    <img
-                        src="${obtenerImagenAlimento(alimento)}"
-                        alt="Imagen de ${alimento.nombre}"
-                        onerror="imagenNoDisponible(this)"
-                    >
-
-                    <p style="margin-top:10px;">
-                        ${alimento.nombre}
-                    </p>
-
-                `;
-
-                boton.addEventListener("click", () => {
-
-                    comprobarRespuesta(alimento, boton);
-
-                });
-
-                opcionesRespuesta.appendChild(boton);
+                crearPuesto(alimento, indice);
 
             });
+
+        }
+
+
+        /* =====================================
+           HTML DEL PEDIDO DEL CLIENTE
+           (foto del alimento + lo que dice)
+        ===================================== */
+
+        function htmlPedido(alimento, frase) {
+
+            return `
+                <div class="pedido">
+
+                    <div class="pedido-foto">
+                        <img
+                            src="${obtenerImagenAlimento(alimento)}"
+                            alt="${alimento.nombre}"
+                            onerror="imagenNoDisponible(this)"
+                        >
+                    </div>
+
+                    <p>
+                        ${frase}
+                        <strong style="font-size:1.25em;">${alimento.nombre}</strong>
+                    </p>
+
+                </div>
+            `;
+
+        }
+
+
+        /* =====================================
+           CREAR UN PLATILLO TAPADO CON UN BOWL
+        ===================================== */
+
+        function crearPuesto(alimento, indice) {
+
+            const puesto = document.createElement("div");
+
+            // Se precarga el GIF (sin mostrarlo) para que aparezca al instante
+            new Image().src = obtenerGifSena(alimento);
+
+            puesto.className = "puesto";
+            puesto.dataset.archivo = alimento.archivo;
+
+            // El GIF no se carga hasta levantar el bowl:
+            // así la seña no se ve ni se anima antes de tiempo.
+            puesto.innerHTML = `
+
+                <button
+                    type="button"
+                    class="plato"
+                    aria-pressed="false"
+                    aria-label="Levantar el bowl ${indice + 1}">
+
+                    <span class="plato-base"></span>
+
+                    <div class="marco-sena">
+
+                        <img
+                            class="gif-sena"
+                            alt="Seña del bowl ${indice + 1}"
+                        >
+
+                        <div class="sin-recurso">
+                            Falta el GIF: ${alimento.archivo}
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="tapa"
+                        src="recursos/bowl.svg"
+                        alt=""
+                    >
+
+                </button>
+
+                <p class="puesto-nombre"></p>
+
+                <button
+                    type="button"
+                    class="boton servir"
+                    disabled>
+
+                    SERVIR ESTE
+
+                </button>
+
+            `;
+
+            const plato = puesto.querySelector(".plato");
+            const servir = puesto.querySelector(".servir");
+
+            plato.addEventListener("click", () => {
+
+                alternarBowl(puesto);
+
+            });
+
+            servir.addEventListener("click", () => {
+
+                comprobarRespuesta(alimento, puesto);
+
+            });
+
+            opcionesRespuesta.appendChild(puesto);
+
+        }
+
+
+        /* =====================================
+           LEVANTAR O TAPAR UN BOWL
+        ===================================== */
+
+        function abrirPuesto(puesto) {
+
+            const gif = puesto.querySelector(".gif-sena");
+            const plato = puesto.querySelector(".plato");
+            const alimento = buscarPorArchivo(puesto.dataset.archivo);
+            const url = obtenerGifSena(alimento);
+
+            gif.classList.remove("roto");
+            gif.onerror = () => gif.classList.add("roto");
+
+            // Se quita y se vuelve a poner el GIF para que la seña
+            // empiece desde el inicio cada vez que se levanta el bowl.
+            gif.removeAttribute("src");
+
+            requestAnimationFrame(() => {
+
+                if (puesto.classList.contains("abierto")) {
+
+                    gif.src = url;
+
+                }
+
+            });
+
+            puesto.classList.add("abierto");
+            plato.setAttribute("aria-pressed", "true");
+            plato.setAttribute("aria-label", "Tapar el bowl otra vez");
+            gif.alt = "Seña que esconde este bowl";
+
+            puesto.querySelector(".servir").disabled = false;
+
+        }
+
+        function cerrarPuesto(puesto, indice) {
+
+            const gif = puesto.querySelector(".gif-sena");
+            const plato = puesto.querySelector(".plato");
+
+            puesto.classList.remove("abierto");
+            plato.setAttribute("aria-pressed", "false");
+            plato.setAttribute("aria-label", `Levantar el bowl ${indice + 1}`);
+
+            gif.removeAttribute("src");
+            gif.classList.remove("roto");
+
+            puesto.querySelector(".servir").disabled = true;
+
+        }
+
+        function alternarBowl(puesto) {
+
+            if (respuestaSeleccionada) return;
+
+            const puestos = [...opcionesRespuesta.querySelectorAll(".puesto")];
+
+            const estabaAbierto = puesto.classList.contains("abierto");
+
+            // Solo un bowl puede estar levantado a la vez
+            puestos.forEach((otro, indice) => {
+
+                if (otro.classList.contains("abierto")) {
+
+                    cerrarPuesto(otro, indice);
+
+                }
+
+            });
+
+            if (!estabaAbierto) {
+
+                abrirPuesto(puesto);
+
+            }
 
         }
 
@@ -679,18 +839,30 @@
                 elegida.archivo === correcta.archivo;
 
 
-            // DESACTIVAR OPCIONES
+            // LEVANTAR TODOS LOS BOWLS PARA REPASAR LAS SEÑAS
 
-            const botones =
-                opcionesRespuesta.querySelectorAll("button");
+            const puestos =
+                opcionesRespuesta.querySelectorAll(".puesto");
 
-            botones.forEach(boton => {
+            puestos.forEach(puesto => {
 
-                boton.disabled = true;
+                const alimentoPuesto =
+                    buscarPorArchivo(puesto.dataset.archivo);
 
-                if (boton.dataset.archivo === correcta.archivo) {
+                abrirPuesto(puesto);
 
-                    boton.classList.add("correcta");
+                puesto.querySelector(".plato").disabled = true;
+                puesto.querySelector(".servir").disabled = true;
+
+                puesto.querySelector(".gif-sena").alt =
+                    `Seña de ${alimentoPuesto.nombre}`;
+
+                puesto.querySelector(".puesto-nombre").textContent =
+                    alimentoPuesto.nombre;
+
+                if (puesto.dataset.archivo === correcta.archivo) {
+
+                    puesto.classList.add("correcta");
 
                 }
 
@@ -729,7 +901,7 @@
                     platillo.fallos[paso.indiceRol] = true;
 
                     texto =
-                        `¡Buen intento! La seña era ${correcta.nombre}. Esa parte del platillo queda sin completar.`;
+                        `¡Buen intento! El bowl correcto era el de ${correcta.nombre}. Esa parte del platillo queda sin completar.`;
 
                     chef = "personajes/chef-lila-animando.svg";
 
@@ -808,6 +980,10 @@
 
             botonContinuar.classList.remove("oculto");
 
+            // Lleva la vista al resultado y deja el foco en el botón de seguir
+            mensajeRespuesta.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            botonContinuar.focus({ preventScroll: true });
+
         }
 
 
@@ -841,8 +1017,6 @@
             pantallaJuego.classList.add("oculto");
 
             pantallaResultado.classList.remove("oculto");
-
-            videoPregunta.pause();
 
             document.getElementById("resultadoPuntos").textContent =
                 `${puntuacion} / ${PUNTOS_MAXIMOS}`;
@@ -942,8 +1116,6 @@
             pantallaResultado.classList.add("oculto");
 
             pantallaInicio.classList.remove("oculto");
-
-            videoPregunta.pause();
 
         }
 
